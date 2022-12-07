@@ -47,21 +47,20 @@ print("Part One:", part_one_result)
 
 smallest_size = 70_000_000
 
-sizes = list()
 
 def calculate_size_2(dir, dict):
-    global smallest_size, needed_space, sizes
+    global smallest_size, needed_space
     successors = dict[dir]
 
     if isinstance(successors, int):
         return successors  # it's the size of a file
 
     current_size = sum([calculate_size_2(key, successors) for key in successors.keys()])
-    sizes.append(current_size)
 
     if needed_space <= current_size < smallest_size:
         smallest_size = current_size
     return current_size
+
 
 calculate_size_2("/", directories)
 print("Part Two:", smallest_size)
