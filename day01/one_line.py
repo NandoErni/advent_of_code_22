@@ -1,2 +1,2 @@
-print("Part One:", max([sum(list(map(int, g.split("\n")))) for g in open("input.txt", "r").read().split("\n\n")]))
-print("Part Two:", sum(sorted([sum(list(map(int, g.split("\n")))) for g in open("input.txt", "r").read().split("\n\n")])[-3:]))
+print("Part one:", max([sum(list(map(int, g.split("\n")))) for g in open("input.txt", "r").read().split("\n\n")]))
+print("Part two:", sum(sorted([sum(list(map(int, g.split("\n")))) for g in open("input.txt", "r").read().split("\n\n")])[-3:]))
