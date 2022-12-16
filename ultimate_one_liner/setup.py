@@ -3,7 +3,7 @@ from pathlib import Path
 import shutil
 
 parent_path = Path(os.getcwd()).parent.absolute()
-all_dirs = [dir for dir in os.listdir(parent_path) if dir.startswith('day')]
+all_dirs = sorted([dir for dir in os.listdir(parent_path) if dir.startswith('day')])
 
 INPUT_DIR = 'inputs'
 
@@ -25,5 +25,16 @@ for dir in all_dirs:
     new_input = os.path.join(INPUT_DIR, f'{dir}_input.txt')
 
     with open(input_path, 'r') as fili:
-        ultimate_one_liners.append(fili.read().replace('input.txt', new_input))
-print("\n".join(ultimate_one_liners))
+        file_content = fili.read().replace('input.txt', new_input).replace('Part ', f'Day {dir[-2:]} Part ')
+        if file_content.strip() == '':
+            continue
+        ultimate_one_liners.extend(file_content.split('\n'))
+
+ultimate_one_liner = " or ".join(ultimate_one_liners)
+improved_ultimate_one_liner = f'exec("".join(map(chr, {str(list(map(ord, " or ".join(ultimate_one_liners))))})))'
+
+with open("one_line.py", "w") as text_file:
+    text_file.write(ultimate_one_liner)
+
+with open("one_line_improved.py", "w") as text_file:
+    text_file.write(improved_ultimate_one_liner)
